@@ -1,6 +1,7 @@
 package com.example.twitter_clone.util.exceptions;
 
 import com.example.twitter_clone.DTO.security.ErrorMessageDTO;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,18 @@ public class GlobalExceptionsHandler {
     }
     @ExceptionHandler
     public ResponseEntity<ErrorMessageDTO> exceptionHandle(AuthException exc){
+        ErrorMessageDTO errorMessageDTO = new ErrorMessageDTO(404, exc.getMessage());
+        return new ResponseEntity<>(errorMessageDTO, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorMessageDTO> exceptionHandle(IllegalAccessException exc){
+        ErrorMessageDTO errorMessageDTO = new ErrorMessageDTO(404, exc.getMessage());
+        return new ResponseEntity<>(errorMessageDTO, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorMessageDTO> exceptionHandle(EntityNotFoundException exc){
         ErrorMessageDTO errorMessageDTO = new ErrorMessageDTO(404, exc.getMessage());
         return new ResponseEntity<>(errorMessageDTO, HttpStatus.NOT_FOUND);
     }

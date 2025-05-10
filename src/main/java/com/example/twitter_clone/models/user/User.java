@@ -31,7 +31,7 @@ public class User {
     @OneToOne(mappedBy = "user")
     private UserLocation location;
     @Column(name = "birth_date")
-    private Date birth_date;
+    private Date birthDate;
     @Column(name = "avatar_url")
     private String avatar_url;
     @Column(name = "verification")
